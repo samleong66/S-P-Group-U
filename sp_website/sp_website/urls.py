@@ -25,8 +25,8 @@ def return_static(request, path, insecure=True, **kwargs):
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("login/", login_views.login_view, name='login'),
-    path("signup/", login_views.signup_view, name='signup'),
+    path("login/", login_views.login, name='login'),
+    path("signup/", login_views.signup, name='signup'),
     path("index/", index_views.index, name='index'),
     re_path(r'^static/(?P<path>.*)$', return_static, name='static'),
     path('success/', login_views.success, name='success'),
