@@ -27,7 +27,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("login/", login_views.login, name='login'),
     path("signup/", login_views.signup, name='signup'),
-    path("index/", index_views.index, name='index'),
+    path("", index_views.index, name='index'),
     re_path(r'^static/(?P<path>.*)$', return_static, name='static'),
     path('success/', login_views.success, name='success'),
 ]

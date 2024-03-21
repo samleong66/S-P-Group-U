@@ -126,3 +126,69 @@ STATIC_ROOT = (os.path.join(BASE_DIR, 'static'))
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(filename)s %(funcName)s %(lineno)d %(message)s',
+        }
+    },
+    'handlers': {
+        'manual_file': {
+            'level': 'INFO',
+            'filename': (os.path.join(BASE_DIR, 'logging/manual.log')),
+            'formatter': 'verbose',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'maxBytes': 5 * 1024 * 1024,
+            'backupCount': 10
+        },
+        'request_file': {
+            'level': 'INFO',
+            'filename': (os.path.join(BASE_DIR, 'logging/request.log')),
+            'class': 'logging.handlers.RotatingFileHandler',
+            'formatter': 'verbose',
+            'maxBytes': 5 * 1024 * 1024,
+            'backupCount': 10
+        },
+        'custom_file': {
+            'level': 'INFO',
+            'filename': (os.path.join(BASE_DIR, 'logging/custom.log')),
+            'class': 'logging.handlers.RotatingFileHandler',
+            'formatter': 'verbose',
+            'maxBytes': 5 * 1024 * 1024,
+            'backupCount': 10
+        },
+        'warning_file': {
+            'level': 'WARNING',
+            'filename': (os.path.join(BASE_DIR, 'logging/warning.log')),
+            'class': 'logging.handlers.RotatingFileHandler',
+            'formatter': 'verbose',
+            'maxBytes': 5 * 1024 * 1024,
+            'backupCount': 10
+        },
+    },
+    'loggers': {
+        '': {
+            'handlers': ['manual_file'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+        'django': {
+            'handlers': ['request_file'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+        'custom': {
+            'handlers': ['custom_file'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+        'warning': {
+            'handlers': ['warning_file'],
+            'level': 'WARNING',
+            'propagate': False,
+        },
+    },
+}
